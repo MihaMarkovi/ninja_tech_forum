@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Ninja Tech Forum | about{% endblock title %}
+{%block content%}
+<div class="col-md-6 col-md-offset-3">
+    <div class="jumbotron">
+        <table>
+            <tr>
+                <th> {{ topic.title }}</th>
+            </tr>
+            <tr>
+                <td> {{ topic.content }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{%endblock content%}

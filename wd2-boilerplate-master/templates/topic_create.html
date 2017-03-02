@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Create new topic{% endblock title %}
+{%block content%}
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3"><h2>Create new topic</h2>
+                <form method="post">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input class="form-control" name="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Content</label>
+                        <textarea class="form-control" rows="6" name="content" required></textarea><br>
+                        <button class="btn btn-default" type="submit">OK</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

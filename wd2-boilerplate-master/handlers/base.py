@@ -3,6 +3,8 @@ import jinja2
 import webapp2
 from google.appengine.api import users
 
+from models.topic import Topic
+
 template_dir = os.path.join(os.path.dirname(__file__), "../templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
 
@@ -32,10 +34,10 @@ class BaseHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             params["user"] = user
-            params["logout_url"] = users.create_logout_url("/")
+            params["logout_url"] = users.create_logout_url(self.request.uri)
 
         else:
-            params["login_url"] = users.create_login_url("/")
+            params["login_url"] = users.create_login_url(self.request.uri)
 
         template = jinja_env.get_template(view_filename)
         return self.response.out.write(template.render(params))
@@ -43,7 +45,9 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        return self.render_template("main.html")
+        seznam = Topic.query().order(-Topic.created).fetch()
+        params = {"seznam": seznam}
+        return self.render_template("main.html", params=params)
 
 
 class AboutHandler(BaseHandler):

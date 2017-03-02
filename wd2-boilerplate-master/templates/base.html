@@ -37,6 +37,7 @@
                         <li><a href="/about">About</a></li>
                     {% if logout_url %}
                         <li><a href="#">{{ user.nickname() }}</a></li>
+                        <li><a href="topic/add">Create Topic</a> </li>
                         <li><a href="{{ logout_url }}">Logout</a></li>
                     {% elif login_url %}
                         <li><a href="{{ login_url }}">Login</a></li>

@@ -2,7 +2,28 @@
 {% block title %}Ninja Tech Forum{% endblock title %}
 {%block content%}
 <div class="jumbotron">
-<h1>Welcome to Ninja</h1><h1>Tech Forum</h1>
-   <button class="btn btn-info"><a href="/about">Learn more</a></button>
+    <h1>Welcome to Ninja</h1>
+    <h1>Tech Forum</h1>
+    <button class="btn btn-info"><a href="/about">Learn more</a></button>
+</div>
+<div class="jumbotron">
+<table>
+    <tr>
+        <th>Author email</th>
+        <th>Tilte</th>
+        <th>Content </th>
+        <th>Data</th>
+    </tr>
+
+        {% for topic in seznam %}
+            <tr>
+                <td> {{ topic.author_email }} </td>
+                <td> {{ topic.title }} </td>
+                <td><a href="/topic/{{ topic.key.id() }}"> {{ topic.content }} </a></td>
+                <td> {{ topic.created }} </td>
+            </tr>
+        {% endfor %}
+
+</table>
 </div>
 {%endblock content%}
