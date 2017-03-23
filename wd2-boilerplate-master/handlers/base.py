@@ -6,7 +6,7 @@ from google.appengine.api import users
 from models.topic import Topic
 
 template_dir = os.path.join(os.path.dirname(__file__), "../templates")
-jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
 
 class BaseHandler(webapp2.RequestHandler):
@@ -45,14 +45,21 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        seznam = Topic.query().order(-Topic.created).fetch()
+        seznam = Topic.query( Topic.deleted == False).order(-Topic.updated).fetch()
         params = {"seznam": seznam}
         return self.render_template("main.html", params=params)
 
+class NotLoginHandler(BaseHandler):
+    def get(self):
+        return self.render_template("not_registered.html")
 
 class AboutHandler(BaseHandler):
     def get(self):
         return self.render_template("about.html")
+
+class HackerHandler(BaseHandler):
+    def get(self):
+        return self.render_template("hacker.html")
 
 
 class CookieHandler(BaseHandler):

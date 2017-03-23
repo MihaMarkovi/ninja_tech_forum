@@ -6,6 +6,7 @@
     <h1>Tech Forum</h1>
     <button class="btn btn-info"><a href="/about">Learn more</a></button>
 </div>
+
 <div class="jumbotron">
 <table>
     <tr>
@@ -20,7 +21,7 @@
                 <td> {{ topic.author_email }} </td>
                 <td> {{ topic.title }} </td>
                 <td><a href="/topic/{{ topic.key.id() }}"> {{ topic.content }} </a></td>
-                <td> {{ topic.created }} </td>
+                <td> {{ topic.updated.strftime("%d.%m.%Y at %H:%M") }} </td>
             </tr>
         {% endfor %}
 
