@@ -61,6 +61,9 @@ class HackerHandler(BaseHandler):
     def get(self):
         return self.render_template("hacker.html")
 
+class SubscribeHandler(BaseHandler):
+    def get(self):
+        return self.render_template("subscribe_user.html")
 
 class CookieHandler(BaseHandler):
     def post(self):

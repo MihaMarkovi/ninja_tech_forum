@@ -1,11 +1,23 @@
 {% extends "base.html" %}
-{% block title %}You are not login{% endblock title %}
+{% block title %}Comment list{% endblock title %}
 {%block content%}
 
 <div class="jumbotron">
-    {% for comment in seznam %}
-        <p>{{ comment.content }}</p>
-    {% endfor %}
+    <h1 style="text-align: center;">Comment List</h1>
+    <table class="table">
+        <tr>
+            <td>Title of topic</td>
+            <td>Content</td>
+            <td>Created</td>
+        </tr>
+        {% for comment in seznam %}
+        <tr>
+            <td>{{ comment.topic_title }}</td>
+            <td>{{ comment.content }}</td>
+            <td>{{ comment.updated.strftime("%d.%m.%Y at %H:%M") }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 
 {%endblock content%}

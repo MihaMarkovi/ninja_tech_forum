@@ -1,4 +1,10 @@
 cron:
 - description: Delete topics older than 30 days
   url: /cron/delete-topics
-  schedule: every monday 15:00
+  schedule: every 24 hours
+- description: Delete comments older than 30 days
+  url: /cron/delete-comments
+  schedule: every 24 hours
+- description: Send mail every registered user
+  url: /cron/subscribe-topics
+  schedule: every 24 hours

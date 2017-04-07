@@ -12,9 +12,20 @@ indexes:
 
 - kind: Comment
   properties:
+  - name: author_email
+  - name: updated
+    direction: desc
+
+- kind: Comment
+  properties:
   - name: deleted
   - name: topic_id
   - name: created
+
+- kind: Comment
+  properties:
+  - name: deleted
+  - name: updated
 
 - kind: Topic
   properties:

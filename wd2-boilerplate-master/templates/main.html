@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Ninja Tech Forum{% endblock title %}
 {%block content%}
-<div class="jumbotron">
+<div class="jumbotron" id="main-page-jumbotron">
     <h1>Welcome to Ninja</h1>
     <h1>Tech Forum</h1>
-    <button class="btn btn-info"><a href="/about">Learn more</a></button>
+    <button class="btn btn-info"><a href="/about" style="color: green;">Learn more</a></button>
 </div>
 
-<div class="jumbotron">
-<table>
+<div class="jumbotron" >
+<table class="table table-sm">
+    <thead>
     <tr>
         <th>Author email</th>
         <th>Tilte</th>
         <th>Content </th>
         <th>Data</th>
     </tr>
-
+    </thead>
+    <tbody>
         {% for topic in seznam %}
             <tr>
                 <td> {{ topic.author_email }} </td>
@@ -24,7 +26,7 @@
                 <td> {{ topic.updated.strftime("%d.%m.%Y at %H:%M") }} </td>
             </tr>
         {% endfor %}
-
+    </tbody>
 </table>
 </div>
 {%endblock content%}

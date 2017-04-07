@@ -12,7 +12,7 @@ handlers:
   script: main.app
   login: admin
 
-- url: /cron .*
+- url: /cron.*
   script: main.app
   login: admin
 

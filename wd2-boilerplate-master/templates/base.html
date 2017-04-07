@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="http://oak.ninja/img/ninja.gif">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>{% block title %}{% endblock title %}</title>
-
     <!-- Bootstrap -->
     <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Lightbox -->
+    <link href="/assets/lightbox/css/lightbox.css" rel="stylesheet">
+
+    <title>{% block title %}{% endblock title %}</title>
+
     <link href="/assets/custom/css/style.css" rel="stylesheet">
 </head>
 
@@ -35,34 +40,40 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/about">About</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
                     {% if logout_url %}
                     <li><a href="#">{{ user.nickname() }}</a></li>
+                    <li><a href="/comment_list">Your Comment List</a></li>
                     <li><a href="/topic/add">Create Topic</a></li>
+                    <li><a href="/my_profile">My profile</a></li>
                     <li><a href="{{ logout_url }}">Logout</a></li>
                     {% elif login_url %}
                     <li><a href="{{ login_url }}">Login</a></li>
                     {% endif %}
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     {%if not piskotki%}
-
-    <div class="alert alert-warning" role="alert">
-        Hey, we use cookies. Do you accept them? :)
-        <form action="/set-cookie" method="post">
-            <button class="btn btn-success btn-xs">I accept</button>
-        </form>
-    </div>
+            <div class="alert alert-warning" role="alert">
+                Hey, we use cookies. Do you accept them? :)
+                <form action="/set-cookie" method="post">
+                    <button class="btn btn-success btn-xs">I accept</button>
+                </form>
+            </div>
     {%endif%}
     {%block content%}{%endblock content%}
 </div>
 
+<script src="/assets/bootstrap/js/bootstrap.js"></script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/assets/bootstrap/js/bootstrap.js"></script>
+<!-- Lightbox JS -->
+<script src="/assets/lightbox/js/lightbox.js"></script>
 {%block scripts%}
 
 {%endblock scripts%}

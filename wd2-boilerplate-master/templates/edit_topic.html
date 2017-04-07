@@ -3,7 +3,7 @@
 {%block content%}
     <div class="jumbotron">
         <form action="/topic/{{ topic.key.id() }}/edit" method="post">
-            <textarea rows="6" name="content" required></textarea><br>
+            <textarea class="form-control" rows="6" name="content" required>{{ topic.content }}</textarea><br>
 
             <button type="submit">OK</button>
         </form>
