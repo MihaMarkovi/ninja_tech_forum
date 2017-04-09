@@ -1,21 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Topic Details{% endblock title %}
 {%block content%}
-<div class="col-md-6 col-md-offset-3">
-    <div class="jumbotron">
-        <table>
-            <tr>
-                <th> {{ topic.title }}</th>
-            </tr>
-            <tr>
-                <td> {{ topic.content }}</td>
-            </tr>
-        </table>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title"><h2>{{ topic.title }}</h2></div>
+            </div>
+            <div class="panel-body">
+                <p>{{ topic.content }}</p>
+                <hr>
+                {%if topic.author_email == user.email() or current_user%}
+                        <button class="btn btn-info"><a style="color: green"
+                                                        href="/topic/{{ topic.key.id() }}/edit">Edit</a>
+                        </button>
+                        <button class="btn btn-info"><a style="color: green" href="/topic/{{ topic.key.id() }}/delete">Delete</a>
+                        </button>
+
+                        {%endif%}
+
+            </div>
+        </div>
         <br>
-        {%if topic.author_email == user.email() or current_user%}
-        <button class="btn btn-info"><a href="/topic/{{ topic.key.id() }}/edit">Edit</a></button>
-        <button class="btn btn-info"><a href="/topic/{{ topic.key.id() }}/delete">Delete</a></button>
-        {%endif%}
+
     </div>
 </div>
 
@@ -26,7 +34,8 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h3 class="panel-title">{{ comment.author_email }} on {{ comment.created.strftime("%d.%m.%Y at %H:%M") }}</h3>
+                <h3 class="panel-title">{{ comment.author_email }} on {{ comment.created.strftime("%d.%m.%Y at %H:%M")
+                    }}</h3>
             </div>
 
             <div class="panel-body">

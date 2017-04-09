@@ -17,27 +17,33 @@ class TopicCreateHandler(BaseHandler):
 
         user = users.get_current_user()
 
+        if not user:
+            return self.redirect_to("not-registered")
+
         topic_title = self.request.get("title")
         the_content = self.request.get("content")
         user = users.get_current_user()
 
-        if not user:
-            return self.redirect_to("not-registered")
 
-        Topic.create()
+
+        new_topic=Topic.create(content= the_content, author_email= user, title= topic_title)
+        new_topic.put()
 
         return self.redirect_to("topic-details", topic_id = new_topic.key.id())
 
 class TopicDetails(BaseHandler):
     def get(self, topic_id):
+        csrf_token = str(uuid.uuid4())
         topic = Topic.get_by_id(int(topic_id))
         user = users.get_current_user()
         if not user:
             return self.redirect_to("not-registered")
+        current_user = users.is_current_user_admin()
+        memcache.add(key=csrf_token, value=user.email(), time=600)
         comments = Comment.query(Comment.topic_id == topic.key.id(), Comment.deleted == False).order(Comment.created).fetch()
 
 
-        params = {'topic': topic, "comments": comments}
+        params = {'topic': topic, "csrf_token": csrf_token, "comments": comments, "current_user": current_user}
 
         return self.render_template('topic_details.html', params=params)
 
